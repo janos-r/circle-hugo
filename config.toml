@@ -1,5 +1,5 @@
 title = "Peace Square in Prague"
-baseURL = "https://example.com"
+baseURL = "/"
 languageCode = "en-us"
 theme = "ananke"
 MetaDataFormat = "yaml"
@@ -16,7 +16,7 @@ filename = "sitemap.xml"
 
 [params]
 favicon = ""
-description = "The last theme you'll ever need. Maybe."
+description = "The most peacefull square in Prague."
 facebook = ""
 twitter = "https://twitter.com/GoHugoIO"
 instagram = ""
