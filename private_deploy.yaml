@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-circle
+  labels:
+    app: circle
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: circle
+  template:
+    metadata:
+      labels:
+        app: circle
+    spec:
+      containers:
+        - name: repo1-container
+          image: radimj/repo1
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: regcred
