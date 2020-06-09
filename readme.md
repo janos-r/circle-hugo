@@ -1,10 +1,13 @@
 ## docker
 
 build image:\
-`docker build -t circle .`
+`docker build -t radimj/repo1 .`
 
-run and forward port:\
-`docker run -d -p 80:80 circle`
+run and forward port to localhost:\
+`docker run -d -p 80:80 radimj/repo1`
+
+push to docker hub:\
+`docker push radimj/repo1`
 
 ## kubernetes
 
