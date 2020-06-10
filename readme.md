@@ -30,7 +30,7 @@ forward or expose pod:\
 `kubectl expose pod repo1 --type="NodePort"`
 
 expose deployment:\
-`kubectl expose deployment dep-repo1 --type=LoadBalancer`
+`kubectl expose deployment circle-deployment --type=LoadBalancer`
 
 nodeport in:\
 `kubectl get svc`
@@ -38,3 +38,6 @@ nodeport in:\
 
 exposed on:\
 (minikube ip):&nodePort
+
+create new yaml file from:\
+`kubectl get (deploy / svc / pod ) -o yaml`
