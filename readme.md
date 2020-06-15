@@ -22,9 +22,6 @@ kubectl create secret generic regcred \
 run once pod with secret:\
 `kubectl run repo1 --overrides='{ "spec": { "imagePullSecrets": [{"name": "regcred"}] } }' --image=radimj/repo1 --port=80`
 
-run pod / deployment from yaml:\
-`kubectl apply --filename private_deploy.yaml`
-
 forward or expose pod:\
 `kubectl port-forward repo1 8080:80`\
 `kubectl expose pod repo1 --type="NodePort"`
@@ -41,3 +38,39 @@ exposed on:\
 
 create new yaml file from:\
 `kubectl get (deploy / svc / pod ) -o yaml`
+
+run pod / deployment from yaml:\
+`kubectl apply --filename private_deploy.yaml`
+
+revert (delete) from yaml:\
+`kubectl delete -f private_deploy.yaml`
+
+## helm
+
+display docker login secret from kubectl:\
+
+```
+kubectl get secret regcred \
+    --output jsonpath="{.data.\.dockerconfigjson}" | \
+    base64 --decode | \
+    jq ".auths | map(.auth)[0]" -r | \
+    base64 --decode
+```
+
+lint chart:\
+`helm lint circle-chart/`
+
+build package:\
+`helm package circle-chart/`
+
+install: (name should be same as package name)\
+`helm install circle circle-0.2.0.tgz`
+
+check release:\
+`helm ls`
+
+uninstall totally:\
+`helm uninstall circle`
+
+# todo:
+rolling update
