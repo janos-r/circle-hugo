@@ -12,8 +12,7 @@ jobs:
       - run:
           name: Build html in ./public/
           command: hugo -v
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - run:
           name: Docker build from html
           command: sudo docker build -t $hub_docker_user/repo1 .
