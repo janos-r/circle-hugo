@@ -13,6 +13,7 @@ jobs:
           name: Build html in ./public/
           command: hugo -v
       - setup_remote_docker
+      # in case of testing via circleci (cli) localy, the docker commands need sudo
       - run:
           name: Docker build from html
           command: docker build -t $hub_docker_user/repo1 .
