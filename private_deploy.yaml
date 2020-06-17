@@ -13,9 +13,9 @@ spec:
     metadata:
       labels:
         app: circle
-      annotations:
-# creates a random 5 letter word, causing the pods to be recreated
-        rollme: {{ randAlphaNum 5 | quote }}
+#      annotations:
+# creates a random 5 letter word, causing the pods to be recreated - in helm!
+#        rollme: {{ randAlphaNum 5 | quote }}
     spec:
       containers:
         - name: repo1-container
