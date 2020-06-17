@@ -1,3 +1,8 @@
+## static page
+
+build html (/public)
+`hugo`
+
 ## docker
 
 build image:\
@@ -65,6 +70,7 @@ build package:\
 
 install: (name should be same as package name)\
 `helm install circle circle-0.2.0.tgz`
+`helm install circle circle-chart/`
 
 check release:\
 `helm ls`
@@ -73,4 +79,5 @@ uninstall totally:\
 `helm uninstall circle`
 
 # todo:
+
 rolling update
