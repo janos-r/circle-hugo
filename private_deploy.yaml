@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dep-circle
+  name: circle-deployment
   labels:
     app: circle
 spec:
@@ -21,3 +21,56 @@ spec:
             - containerPort: 80
       imagePullSecrets:
         - name: regcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: circle-service
+  labels:
+    app: circle
+spec:
+  type: LoadBalancer
+  selector:
+    app: circle
+  ports:
+    - port: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: circle2-deployment
+  labels:
+    app: circle2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: circle2
+  template:
+    metadata:
+      labels:
+        app: circle2
+    spec:
+      containers:
+        - name: repo1-container
+          image: radimj/repo1:v2
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: regcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: circle2-service
+  labels:
+    app: circle2
+spec:
+  type: LoadBalancer
+  selector:
+    app: circle2
+  ports:
+    - port: 80

@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cibuilds/hugo
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Docker login
+          command: docker login -u $hub_docker_user -p $hub_docker_pw
+      - run:
+          name: Build html in ./public/
+          command: hugo -v
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Docker build from html
+          command: sudo docker build -t $hub_docker_user/repo1 .
+      - run:
+          name: Docker push
+          command: sudo docker push $hub_docker_user/repo1
+
+workflows:
+  version: 2
+  workflow_1:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
