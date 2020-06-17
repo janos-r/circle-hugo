@@ -3,12 +3,12 @@ jobs:
   build:
     docker:
       - image: cibuilds/hugo
-    working_directory: ~/repo
+    working_directory: ~/hugo
     steps:
       - checkout
       - run:
-          name: Docker login
-          command: docker login -u $hub_docker_user -p $hub_docker_pw
+          name: clone also submodules (themes)
+          command: git submodule update --init
       - run:
           name: Build html in ./public/
           command: hugo -v
@@ -16,6 +16,9 @@ jobs:
       - run:
           name: Docker build from html
           command: sudo docker build -t $hub_docker_user/repo1 .
+      - run:
+          name: Docker login
+          command: docker login -u $hub_docker_user -p $hub_docker_pw
       - run:
           name: Docker push
           command: sudo docker push $hub_docker_user/repo1
