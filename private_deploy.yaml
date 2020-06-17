@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         app: circle
+      annotations:
+# creates a random 5 letter word, causing the pods to be recreated
+        rollme: {{ randAlphaNum 5 | quote }}
     spec:
       containers:
         - name: repo1-container
@@ -35,6 +38,7 @@ spec:
     app: circle
   ports:
     - port: 80
+      nodePort: 30000
 
 ---
 apiVersion: apps/v1

@@ -78,6 +78,15 @@ check release:\
 uninstall totally:\
 `helm uninstall circle`
 
-# todo:
+rolling update:\
+changes only necessary pods, not "latest"
+`helm upgrade --install circle circle-chart/`
+if you want to change "latest" tags, old way was:
+`helm upgrade --install --recreate-pods circle circle-chart/`
+new way is to add a random annotation in mettadata:
 
-rolling update
+```
+      annotations:
+# creates a random 5 letter word, causing the pods to be recreated
+        rollme: {{ randAlphaNum 5 | quote }}
+```
